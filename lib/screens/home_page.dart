@@ -53,26 +53,44 @@ class _PasswordGeneratorState extends State<PasswordGenerator> {
                 const SizedBox(
                   width: 5,
                 ),
-                IconButton(
-                    onPressed: () {
-                      if (_password.isNotEmpty) {
-                        Clipboard.setData(ClipboardData(text: _password))
-                            .then((_) {
-                          ScaffoldMessenger.of(context).showSnackBar(
+                // IconButton(
+                //     onPressed: () {
+                //       if (_password.isNotEmpty) {
+                //         Clipboard.setData(ClipboardData(text: _password))
+                //             .then((_) {
+                //           ScaffoldMessenger.of(context).showSnackBar(
+                //               const SnackBar(
+                //                   content:
+                //                       Text("Password copied to clipboard")));
+                //         });
+                //       } else {
+                //         ScaffoldMessenger.of(context).showSnackBar(
+                //           const SnackBar(
+                //             content: Text(
+                //                 "Password is empty...please generate a password"),
+                //           ),
+                //         );
+                //       }
+                //     },
+                //     icon: const Icon(Icons.copy_outlined))
+                _password.isNotEmpty
+                    ? IconButton(
+                        onPressed: () {
+                          Clipboard.setData(ClipboardData(text: _password))
+                              .then((_) {
+                            ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                  content:
-                                      Text("Password copied to clipboard")));
-                        });
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                                "Password is empty...please generate a password"),
-                          ),
-                        );
-                      }
-                    },
-                    icon: const Icon(Icons.copy_outlined))
+                                content: Text("Password copied to clipboard"),
+                              ),
+                            );
+                          });
+                        },
+                        icon: const Icon(Icons.copy_outlined),
+                      )
+                    : const Text(
+                        "please click on the button below ",
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ), // Empty C
               ],
             ),
             const SizedBox(height: 20),
